@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>{% block title %}Election Polls{% endblock %}</title>
+</head>
+
+<body>
+    <div>
+        {% block content %}{% endblock content %}
+        <div>
+            <p>
+                <a href="{% url 'pu-result' %}">Question 1</a>
+            </p>
+            <p>
+                <a href="{% url 'lga-result-request' %}">Question 2</a>
+            </p>
+            <p>
+                <a href="{% url 'add-pu' %}">Question 3</a>
+            </p>
+    </div>
+    </div>
+    
+</body>
+
+</html>

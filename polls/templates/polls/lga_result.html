@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div>
+{% if result %}
+    <p>
+    <strong>LGA: </strong> {{ lga_name | title }}
+    </p>
+    <p>Polling Units:</p>
+    <div>
+        {% for pu in pollingunit_list %}
+        <p>
+        {{ pu.polling_unit_name | default_if_none:"No Name" | title }} : <em>{{ pu.total | floatformat:"g"  }}</em>
+        </p>
+    {% endfor %}
+    </div>
+    <strong>Total: </strong> {{ total | floatformat:"g"}}
+{% else %}
+    <div><p>No Results for {{ lga_name }}!</p></div>
+{% endif %}
+</div>
+{% endblock content %}

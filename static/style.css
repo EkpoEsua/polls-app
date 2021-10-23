@@ -1,0 +1,29 @@
+body div {
+    margin: auto;
+    width: 640px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 1px;
+}
+
+body{
+    background-color: rgb(234, 234, 245);
+}
+
+body div form{
+    margin: auto;
+    width: 20em;
+}
+
+.flash{
+    color: rgb(255, 0, 0);
+    width: fit-content;
+    margin: auto;
+}
+
+body div div{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: auto;
+    padding: 10px;
+}

@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from django import forms
 from polls.models import LGA, PollingUnit, AnnouncedPUResults, Ward, AgentName
 
@@ -8,40 +9,39 @@ class ResultPerLGAForm(forms.Form):
         to_field_name="lga_id"
     )
 
-class PollingUnitForm(forms.Form):
-    ward_id = forms.ModelChoiceField(
-        queryset=Ward.objects.all(), label="Ward",
-        to_field_name="ward_id"
+class PollingUnitForm(forms.ModelForm):
+    uniquewardid = forms.ModelChoiceField(
+        queryset=Ward.objects.all(), label="Ward"
     )
     lga_id = forms.ModelChoiceField(
-        queryset=LGA.objects.all(), label="LGA I.D.",
+        queryset=LGA.objects.all(), label="LGA",
         to_field_name="lga_id"
     )
-    uniquewardid = forms.IntegerField(disabled=True, widget=forms.HiddenInput)
     polling_unit_number = forms.CharField(max_length=50, help_text="e.g. DTXXXXXXX")
     entered_by_user = forms.ModelChoiceField(
         queryset=AgentName.objects.all(), label="Agent",
-        to_field_name="first_name"
+        to_field_name="firstname"
     )
-    date_entered = forms.DateTimeField(
-        disabled=True, widget=forms.HiddenInput
-    )
-    user_ip_address = forms.CharField(max_length=50, disabled=True, widget=forms.HiddenInput)
 
     class Meta:
         model = PollingUnit
         fields = [
-            "polling_unit_id", "ward_id", "lga_id",
-            "uniquewardid", "polling_unit_number", "polling_unit_name",
+            "uniqueid", "polling_unit_id",
+            "polling_unit_number", "polling_unit_name",
             "polling_unit_description", "lat", "long",
-            "entered_by_user", "date_entered", "user_ip_address"
+            "entered_by_user"
         ]
 
-class AnnouncedPUResultsForm(forms.Form):
+
+class AnnouncedPUResultsForm(forms.ModelForm):
+    entered_by_user = forms.ModelChoiceField(
+        queryset=AgentName.objects.all(), label="Agent",
+        to_field_name="firstname"
+    )
 
     class Meta:
         model = AnnouncedPUResults
         fields = [
-            "polling_unit_uniqueid", "party_abbreviation", "party_score",
+            "result_id", "party_abbreviation", "party_score",
             "entered_by_user", "date_entered", "user_ip_address"
         ]

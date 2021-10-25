@@ -80,6 +80,9 @@ class LGA(models.Model):
 
 
 class Party(models.Model):
+    id = models.AutoField(primary_key=True)
+    partyid = models.CharField(max_length=11)
+    partyname = models.CharField(max_length=11)
 
     class Meta:
         # managed = False

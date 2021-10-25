@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
+            // "justMyCode": false,
             "name": "Python: Django",
             "type": "python",
             "request": "launch",

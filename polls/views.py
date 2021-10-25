@@ -1,14 +1,16 @@
+from functools import partial
 from typing import Any, Dict
 from django.db.models import query
 from django.db.models.query import QuerySet
+from django.forms.models import modelformset_factory
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import ListView, FormView
-from django.views.generic.edit import CreateView
-from polls.models import PollingUnit, AnnouncedPUResults, LGA
-from polls.forms import ResultPerLGAForm, PollingUnitForm
+from django.views.generic import ListView, FormView, CreateView
+from polls.models import PollingUnit, AnnouncedPUResults, LGA, Ward
+from polls.forms import AnnouncedPUResultsForm, ResultPerLGAForm, PollingUnitForm
 from django.urls import reverse_lazy
+from django.utils import timezone
 
 class PUResultView(ListView):
     model = PollingUnit
@@ -81,5 +83,19 @@ class PollingUnitCreationView(CreateView):
     template_name = "polls/polling_unit_form.html"
     success_url = reverse_lazy("add-pu-result")
 
+    def form_valid(self, form: PollingUnitForm) -> HttpResponse:
+        """"""
+        form.instance.date_entered = timezone.now()
+        form.instance.user_ip_address = self.request.META.get("REMOTE_ADDR", "0.0.0.0")
+        form.instance.ward_id = form.cleaned_data['uniquewardid'].ward_id
+        form.instance.uniquewardid = form.cleaned_data['uniquewardid'].uniqueid
+        form.instance.lga_id = form.cleaned_data['lga_id'].lga_id
+        self.object = form.save()
+        success_url = reverse_lazy("add-pu-results", args=[str(self.object.pk)])
+        return HttpResponseRedirect(str(success_url))
+
 class AnnouncedResultCreationView(CreateView):
     """"""
+    model = AnnouncedPUResults
+    # form_class = modelformset_factory(AnnouncedPUResults, AnnouncedPUResultsForm)
+    form_class = AnnouncedPUResultsForm

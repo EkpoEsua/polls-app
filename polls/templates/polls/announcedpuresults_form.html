@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div>
+    <form action="" method="post">
+        <strong><p>Polling Unit's Results.</p></strong>
+        {% csrf_token %}
+        {{ form.management_form }}
+        {% for forms in form %}
+            <br>
+            {{ forms.as_p }}
+            <hr>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+{% endblock content %}

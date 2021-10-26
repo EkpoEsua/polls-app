@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic.base import TemplateView
 from polls import views
 
 urlpatterns = [
@@ -10,5 +11,10 @@ urlpatterns = [
         "polling-unit/<int:pk>/results/add/",
         views.AnnouncedResultCreationView.as_view(),
         name="add-pu-results"
+    ),
+    path(
+        "polling-unit/results/add/success",
+        TemplateView.as_view(template_name="polls/pollingunit_results_add_success.html"),
+        name="pu-result-add-success"
     )
 ]

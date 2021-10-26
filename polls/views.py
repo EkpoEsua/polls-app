@@ -114,9 +114,7 @@ class AnnouncedResultCreationView(CreateView):
         parties = Party.objects.all()
         initial = list()
         for party in parties:
-            init = {
-                "party_abbreviation": party.partyname[:4]
-            }
+            init = {"party_abbreviation": party.partyname[:4]}
             initial.append(init)
 
         return initial
@@ -127,7 +125,7 @@ class AnnouncedResultCreationView(CreateView):
             AnnouncedPUResults,
             form=AnnouncedPUResultsForm,
             extra=len(initial),
-            formset=BaseAnnouncedPUResultsFormSet
+            formset=BaseAnnouncedPUResultsFormSet,
         )
         return form_class
 

@@ -6,7 +6,7 @@ from django.db.models.query import QuerySet
 class AgentName(models.Model):
     name_id = models.AutoField(primary_key=True)
     firstname = models.CharField(max_length=255)
-    lastname =  models.CharField(max_length=255)
+    lastname = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     phone = models.CharField(max_length=13)
     pollingunit_uniqueid = models.IntegerField()
@@ -48,14 +48,12 @@ class AnnouncedPUResults(models.Model):
 
 
 class AnnouncedStateResults(models.Model):
-
     class Meta:
         # managed = False
         db_table = "announced_state_results"
 
 
 class AnnouncedWardResults(models.Model):
-
     class Meta:
         # managed = False
         db_table = "announced_ward_results"
@@ -110,7 +108,6 @@ class PollingUnit(models.Model):
 
 
 class States(models.Model):
-
     class Meta:
         # managed = False
         db_table = "states"
@@ -133,5 +130,3 @@ class Ward(models.Model):
         # managed = False
         db_table = "ward"
         ordering = ["uniqueid"]
-
-

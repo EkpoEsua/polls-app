@@ -3,7 +3,7 @@
 import django
 import os
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'elections.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "elections.settings")
 django.setup()
 
 from date_extractor.data_extractor import SQLDataExecutor

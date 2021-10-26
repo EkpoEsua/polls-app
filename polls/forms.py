@@ -35,6 +35,7 @@ class PollingUnitForm(forms.ModelForm):
 
 class AnnouncedPUResultsForm(forms.ModelForm):
     party_abbreviation = forms.CharField(max_length=4, disabled=True)
+
     class Meta:
         model = AnnouncedPUResults
         fields = [
@@ -49,4 +50,3 @@ class BaseAnnouncedPUResultsFormSet(forms.BaseModelFormSet):
         kwargs.pop("instance")
         super().__init__(*args, **kwargs)
         self.queryset = AnnouncedPUResults.objects.none()
-        
